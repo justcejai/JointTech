@@ -8,9 +8,9 @@ WolfTech is a website for compiling a list of almost all computer science relate
 
 | Pages   | Status      | Wireframe
 | ------- | -------     | ---------
-| Login   | Incomplete  | [wireframe]()
+| Login   | Incomplete  | 
 | Profile | Incomplete  |
-| Event View   | Incomplete  |
-| Event Calendar | Incomplete  | [Joint-Tech-Wireframe.png](https://postimg.cc/Y47PQmfr)
-| Event Swipe   | Incomplete  |
-| Event Quick View  | Incomplete  | [wireframe]()
+| Event View   | Incomplete  | [wireframe](https://postimg.cc/Y47PQmfr)
+| Event Calendar | Incomplete  | [wireframe](https://postimg.cc/Y47PQmfr)
+| Event Swipe   | Incomplete  | [wireframe](https://postimg.cc/Y47PQmfr)
+| Event Quick View  | Incomplete  | [wireframe](https://postimg.cc/Y47PQmfr)
