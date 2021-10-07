@@ -6,6 +6,15 @@ WolfTech is a website for compiling a list of almost all computer science relate
 
 ## WolfTech Components
 
+###### What's done?
+
+###### What's not done?
+* Build Landing Page
+* Build WolfTech Components
+* Build WolfTech Endpoints
+
+###### Pages of WolfTech
+
 | Pages   | Status      | Wireframe
 | ------- | -------     | ---------
 | Login   | Incomplete  | 
@@ -14,3 +23,5 @@ WolfTech is a website for compiling a list of almost all computer science relate
 | Event Calendar | Incomplete  | [wireframe](https://postimg.cc/Y47PQmfr)
 | Event Swipe   | Incomplete  | [wireframe](https://postimg.cc/Y47PQmfr)
 | Event Quick View  | Incomplete  | [wireframe](https://postimg.cc/Y47PQmfr)
+
+###### Endpoints of WolfTech
