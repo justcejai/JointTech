@@ -1,0 +1,87 @@
+/* Dark mode */
+html.dark-mode {
+    filter: invert(100%) hue-rotate(180deg);
+}
+
+/* Sets the background color to a dark blue */
+html, body{
+    background-image: linear-gradient(to right, #ffd966, white, #ffd966);
+}
+
+/* Sets the alignment of elements in a row */
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Sets the company title font. */
+h1 {
+    color: #0088ed;
+    font-family: "Optima";
+    font-weight: 100;
+    font-size: 54px;
+    font-stretch: expanded;
+}
+
+/* Sets the font for the value proposition. */
+.value-prop {
+    color: #0088ed;
+    font-family: "Montesserat";
+    font-size: 32px;
+}
+
+/* Sets the font for the Hero Image quote */
+.quote {
+    color: white;
+    font-family: "Montesserat";
+    font-size: 32px;
+    text-align: center;
+}
+
+/* Sets the font for the Social Proof quote */
+.quote1 {
+    color: black;
+    font-family: "Montesserat";
+    font-size: 24px;
+    text-align: center;
+}
+
+/* Sets the background of social benefits to white */
+.benefits {
+    background-color: white;
+}
+
+.blue {
+    background-color: #0088ED;
+}
+
+/* Sets the font for the Social Proof quote */
+.list {
+    color:white;
+    font-family: "Montesserat";
+    font-size: 24px;
+}
+
+/* Creates the lead generation button */
+a:link, a:visited {
+    background-color: green;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+/* Changes the color of the lead generation button when hovering over */
+a:hover, a:active {
+    background-color: gold;
+}
+
+/* Sets the font for the lead generation text */
+.boom {
+    color: #0088ED;
+    font-family: "Montesserat";
+    font-size: 32px;
+    text-align: center;
+}
