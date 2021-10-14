@@ -1,44 +1,55 @@
 import React, { useState } from 'react';
-import './Login.css';
-import 'bootstrap/dist/css/bootstrap.css';
+import axios from 'axios';
+import { setUserSession } from './Utils/Common';
 
 function Login(props) {
+  const [loading, setLoading] = useState(false);
+  const username = useFormInput('');
+  const password = useFormInput('');
+  const [error, setError] = useState(null);
 
-    const [username, setUsername] = useState(undefined);
-    const [language, setLanguage] = useState(undefined);
+  // handle button click of login form
+  const handleLogin = () => {
+    setError(null);
+    setLoading(true);
+    axios.post('http://localhost:4000/users/signin', { username: username.value, password: password.value }).then(response => {
+      setLoading(false);
+      setUserSession(response.data.token, response.data.user);
+      props.history.push('/dashboard');
+    }).catch(error => {
+      setLoading(false);
+      if (error.response.status === 401) setError(error.response.data.message);
+      else setError("Something went wrong. Please try again later.");
+    });
+  }
 
-    function login(event) {
-        console.log({ username, language });
-        const params = new URLSearchParams({email, password});
-        window.location = `/home?${params.toString()}`;
-        event.preventDefault();
-    }
-
-    return (
-        <div className="d-flex justify-content-center mt-4 p">
-
-            <h1>JointTech</h1>
-
-            <p className="lead">Your event organizer! Just enter your information to get started.</p>
-
-            <section className="row g-3 w-25" >
-                <form onSubmit={home}>
-                    <div className="input-group mb-3">
-                        <input type="email" name="email" className="form-control" placeholder="Username" aria-label="Username" onChange={(event) => setEmail(event.target.value)} />
-                    </div>
-
-                    <div className="input-group mb-3">
-                        <input type="password" name="password" className="form-control" placeholder="Username" aria-label="Username" onChange={(event) => setPassword(event.target.value)} />
-                    </div>
-
-                    <button type="submit" className="btn btn-danger">Log-in</button>
-                </form>
-            </section>
-
-        </div>
-
-        
-    );
+  return (
+    <div>
+      Login<br /><br />
+      <div>
+        Username<br />
+        <input type="text" {...username} autoComplete="new-password" />
+      </div>
+      <div style={{ marginTop: 10 }}>
+        Password<br />
+        <input type="password" {...password} autoComplete="new-password" />
+      </div>
+      {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}<br />
+      <input type="button" value={loading ? 'Loading...' : 'Login'} onClick={handleLogin} disabled={loading} /><br />
+    </div>
+  );
 }
 
-export default Home;
+const useFormInput = initialValue => {
+  const [value, setValue] = useState(initialValue);
+
+  const handleChange = e => {
+    setValue(e.target.value);
+  }
+  return {
+    value,
+    onChange: handleChange
+  }
+}
+
+export default Login;
