@@ -1,20 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Login from './Login';
 import Home from './Home';
-import Match from './Match';
 
 ReactDOM.render(
     <React.StrictMode>
         <BrowserRouter>
             <Switch>
-                <Route path="/" exact component={() => <Home />}/>
+                <Route path="/" exact component={() => <Login />}/>
             </Switch>
 
             <Switch>
-                <Route path="/match" exact component={() => <Match />}/>
+                <Route path="/home" exact component={() => <Home />}/>
             </Switch>
         </BrowserRouter>
     </React.StrictMode>,
