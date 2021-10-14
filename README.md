@@ -7,9 +7,9 @@ WolfTech is a website for compiling a list of almost all computer science relate
 ## WolfTech Components
 
 ###### What's done?
+* Build Landing Page
 
 ###### What's not done?
-* Build Landing Page
 * Build WolfTech Components
 * Build WolfTech Endpoints
 
