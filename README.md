@@ -17,7 +17,7 @@ JointTech is a website for compiling a list of almost all computer science relat
 
 | Pages   | Status      | Wireframe
 | ------- | -------     | ---------
-| Login   | Incomplete  | 
+| Login   | In-Progress  | 
 | Profile | Incomplete  |
 | Event View   | Incomplete  | [wireframe](https://postimg.cc/Y47PQmfr)
 | Event Calendar | Incomplete  | [wireframe](https://postimg.cc/Y47PQmfr)
