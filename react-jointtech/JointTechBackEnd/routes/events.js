@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 // This route signifies the general event page
-router.get('/', (req, res) => {
+router.get('/createevent', (req, res) => {
    
 })
 
@@ -15,7 +15,7 @@ router.post('/createevent', (req, res) => {
 // Gets and posts an event from for the user to view.
 // can be used for retrieving the next event as well. 
 // user can access previous and next events.
-router.get('/:getevent', (req, res) => {
+router.post('/:getevent', (req, res) => {
    
 }) 
 
@@ -34,9 +34,9 @@ router.get('/:addevent', (req, res) => {
    
 })
 
-// Allows users to login with previous created info 
-router.get('/login', (req, res) => {
-
+router.post('/:addevent', (req, res) => {
+   
 })
+
 
 module.exports = router
