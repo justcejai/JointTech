@@ -22,7 +22,7 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 // Allows us to access different routes 
-const signupRouter = require('./routes/signup')
+// const signupRouter = require('./routes/signup')
 // const eventRouter = require('./routes/events')
 // const loginRouter = require('./routes/login')
 const initiliaze = require('./passport-info')
@@ -35,12 +35,12 @@ initiliaze(
 app.set('view-engine', 'ejs')
 
 // Allows us to grab endpoints from signup to access different routes
-app.use('/signup', signupRouter)
+// app.use('/signup', signupRouter)
 // app.use('/events,', eventRouter)
 // app.use('/login', loginRouter)
 // Renders out HTML page
 app.get('/', (req, res) => {
-   res.render('index.ejs', { name: req.user.name })
+   res.render('index.ejs')
 })
 
 // For encrypting the password 
@@ -75,11 +75,11 @@ app.get('/login', (req, res) => {
 })  
 
 //Endpoint for users to signup 
-app.post('/login', passport.authenticate('local'), {
+app.post('/login', passport.authenticate('local', {
    successRedirect: '/',
    failureRedirect: '/login',
    failureFlash: true
-}) 
+}))
 
 app.delete('/logout', (req, res) => {
   req.logOut()
@@ -87,4 +87,3 @@ app.delete('/logout', (req, res) => {
 })
 // This is what will start the server on the port. Type "nodemon server" to run 
 app.listen(port)
-
