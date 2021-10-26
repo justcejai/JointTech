@@ -11,11 +11,7 @@ initiliaze(
    email => users.find(user => user.email === email), 
    id => users.find(user => user.id === id)
 )
-
-
-router.get('/', (req, res) => {
-   res.render('login.ejs')
-})  
+ 
 
 //Endpoint for users to signup 
 router.post('/login', passport.authenticate('local'), {

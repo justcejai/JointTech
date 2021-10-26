@@ -4,7 +4,7 @@ if (process.env.NODE_ENV !== 'production') {
 const express = require('express')
 const app = express()
 const passport = require('passport')
-const port = 5000
+const port = 3000
 const flash = require('express-flash')
 const session = require('express-session')
 
@@ -39,18 +39,14 @@ app.set('view-engine', 'ejs')
 // app.use('/events,', eventRouter)
 // app.use('/login', loginRouter)
 // Renders out HTML page
-app.get('/', (req, res) => {
-   res.render('index.ejs')
-})
 
 // For encrypting the password 
 const bcrypt = require('bcrypt')
 // List of users
 const users = []
 
-//
 app.get('/signup', (req, res) => {
-   res.render('signup.ejs')
+   res.redirect('signup.js')
 })
 
 //Endpoint for users to signup 

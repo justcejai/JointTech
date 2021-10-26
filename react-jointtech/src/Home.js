@@ -17,10 +17,8 @@ class Home extends React.Component {
                 <Card header={"Event Swipe"}/>
                 <Card header={"Event Quickview"}/>
                 </div>
-                
             </div>
         </div>
-        ;
     }
 }
  

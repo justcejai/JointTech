@@ -5,7 +5,8 @@ import axios from 'axios';
 import Login from './Login';
 import Dashboard from './Dashboard';
 import Home from './Home';
-
+import Signup from './Signup';
+import LandingPage from './LandingPage';
 import PrivateRoute from './Utils/PrivateRoute';
 import PublicRoute from './Utils/PublicRoute';
 import { getToken, removeUserSession, setUserSession } from './Utils/Common';
@@ -37,14 +38,17 @@ function App() {
       <BrowserRouter>
         <div>
           <div className="header">
-            <NavLink exact activeClassName="active" to="/">Home</NavLink>
+            <NavLink exact activeClassName="active" to="/">LandingPage</NavLink>
+            <NavLink activeClassName="active" to="/home">Home</NavLink>
             <NavLink activeClassName="active" to="/login">Login</NavLink><small>(Access without token only)</small>
             <NavLink activeClassName="active" to="/dashboard">Dashboard</NavLink><small>(Access with token only)</small>
           </div>
           <div className="content">
             <Switch>
-              <Route exact path="/" component={Home} />
+              <Route exact path="/" component={LandingPage} />
+              <PublicRoute path="/home" component={Home} />
               <PublicRoute path="/login" component={Login} />
+              <PublicRoute path="/signup" component={Signup}/>
               <PrivateRoute path="/dashboard" component={Dashboard} />
             </Switch>
           </div>
