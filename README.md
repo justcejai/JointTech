@@ -9,6 +9,7 @@ JointTech is a website for compiling a list of almost all computer science relat
 ###### What's done?
 * Build Landing Page
 * Endpoints mostly completed for signup and login
+* Screencast for M1: https://youtu.be/bjkhtQ72qLg
 ###### What's not done?
 * Build JointTech Components
 * Build JointTech Endpoints 
@@ -18,8 +19,6 @@ JointTech is a website for compiling a list of almost all computer science relat
 | Pages   | Status      | Wireframe
 | ------- | -------     | ---------
 | Login   | In Progress  | 
-=======
-| Login   | In-Progress  | 
 | Profile | Incomplete  |
 | Event View   | Incomplete  | [wireframe](https://postimg.cc/Y47PQmfr)
 | Event Calendar | Incomplete  | [wireframe](https://postimg.cc/Y47PQmfr)
