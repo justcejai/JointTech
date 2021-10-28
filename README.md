@@ -9,7 +9,7 @@ JointTech is a website for compiling a list of almost all computer science relat
 * In terminal, type command:
 ```
 npm install react-modal
-npm start
+npm start or nodemon (only if installed)
 ```
 * Application should run on port 3000
 
