@@ -4,6 +4,15 @@
 
 JointTech is a website for compiling a list of almost all computer science related events, not only at NC State but across the country. Our goal is to help tech enthusiasts stay organized and up to date with the latest trends in computer science, while also making networking with people who have similar interests even easier, by gathering information about computer science events across several different sites, as well as allowing our users to post events of their own.
 
+## Instructions for Running Applicatoin
+* Navigate to ./react-jointtech/src
+* In terminal, type command:
+```
+npm install react-modal
+npm start
+```
+* Application should run on port 3000
+
 ## JointTech Components
 
 ###### What's done?
