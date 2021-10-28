@@ -2,11 +2,12 @@ import React from 'react';
 
 function Signup() {
       return  (
-          <div>
+          <div className="signuphome">
+           <link rel="stylesheet" type="text/css" href="signup.css" />
            <h1>Sign up</h1>
              <form action="/signup"  method="POST">
                 <div>
-                    <label for="name">Name</label>
+                    <label className="namecolor" for="name">Name</label>
                     <input type="text" id="name" name="name" required/>
                 </div>
                 <div>
