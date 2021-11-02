@@ -1,4 +1,4 @@
-# M1 Project Milestones
+# M2 Project Milestones
 
 ## JointTech Decription
 
@@ -17,6 +17,9 @@ npm start or nodemon (only if installed)
 
 ###### What's done?
 * Build Landing Page
+* Enhance Landing Page UI
+* Build Login Page
+* Build Create Account Page
 * Endpoints mostly completed for signup and login
 * Build JointTech Components (In Progress)
 ###### What's not done?
@@ -27,7 +30,9 @@ npm start or nodemon (only if installed)
 
 | Pages   | Status      | Wireframe
 | ------- | -------     | ---------
-| Login   | In Progress  | [wireframe](https://postimg.cc/Cdrc4WbT)
+| Home | Complete | 
+| Login   | Complete  |
+| Create Account | Complete |
 | Profile | In Progress  | 
 | Event View   | In Progress  | [wireframe](https://postimg.cc/VdSDZDFS)
 | Event Calendar | In Progress  | [wireframe](https://postimg.cc/LqSDXRFf)
