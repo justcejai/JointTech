@@ -21,7 +21,7 @@ npm start or nodemon (only if installed)
 * Build Login Page
 * Build Create Account Page
 * Endpoints mostly completed for signup and login
-* Build JointTech Components (In Progress)
+* Build JointTech Components (Mostly Finished)
 ###### What's not done?
 * Build JointTech Endpoints 
 * Connecting to MongoDB
