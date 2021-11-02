@@ -42,7 +42,7 @@ function LandingPage() {
                             </div>
 
                             <div class="col">
-                                <a href="/signup" target="_blank">
+                                <a href="/login" target="_blank">
                                     <button class="button">
                                         Log In    
                                     </button>    
