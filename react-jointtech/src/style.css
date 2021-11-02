@@ -1,12 +1,48 @@
-/* Dark mode
-html.dark-mode {
-    filter: invert(100%) hue-rotate(180deg);
-} */
+#top-of-page{
+    position: sticky;
+    top: 0;
+    width: 100;
+    padding: .5%;
+    background: linear-gradient(90deg, #462022 0%, #d91a1a 100%);
+}
 
-/* Sets the background color to a dark blue */
-html, body{
-    
-    background-image: linear-gradient(to right, black, black, black);
+#lead{
+    background: linear-gradient(90deg, #462022 0%, #d91a1a 100%);
+}
+
+#why-us {
+    background: linear-gradient(90deg, #462022 0%, #d91a1a 100%);
+}
+
+.container {
+    width: 500px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.button {
+    background-color: gray;
+    padding: .75rem;
+    border-radius: 3rem;
+    color: white;
+    text-transform: uppercase;
+    text-decoration: bold;
+    font-size: 1rem;
+    letter-spacing: .15rem;
+    transition: all .3s;
+}
+
+.lead-button {
+    background-color: gray;
+    padding: 1.25rem;
+    border-radius: 3rem;
+    color: white;
+    text-transform: uppercase;
+    text-decoration: bold;
+    font-size: 3rem;
+    letter-spacing: .15rem;
+    transition: all .3s;
 }
 
 .socialproof {
@@ -20,13 +56,40 @@ html, body{
     align-items: center;
 }
 
-/* Sets the company title font. */
-h1 {
-    color: white;
-    font-family: "Optima";
-    font-weight: 100;
-    font-size: 54px;
-    font-stretch: expanded;
+.large-headline {
+    font-family: times, Times New Roman, times-roman, georgia, serif;
+		font-size: 48px;
+	        line-height: 40px;
+	        letter-spacing: -1px;
+		color: white;
+		margin: 0 0 0 0;
+		padding: 0 0 0 0;
+                font-weight: 100;
+}
+
+.title {
+    color: #fff; 
+    font-family: 'Righteous, cursive'; 
+    font-size: 65px; 
+    font-weight: normal; 
+    line-height: 60px; 
+    text-transform: uppercase; 
+    text-shadow: 2px 2px 0 #000;
+    text-align: center;
+}
+
+.middle-headline {
+    font-family: times, Times New Roman, times-roman, georgia, serif;
+		font-size: 28px;
+		line-height: 40px;
+		letter-spacing: -1px;color: #444;
+}
+
+.paragraph-text {
+    font-family: times, Times New Roman, times-roman, georgia, serif;
+		font-size: 22px;
+		line-height: 20px;
+		color: #444;
 }
 
 /* Sets the font for the value proposition. */
@@ -52,41 +115,17 @@ h1 {
     text-align: center;
 }
 
-/* Sets the background of social benefits to white */
-.benefits {
-    background-color: white;
+.bottom-img {
+    width:100%;
 }
 
-.blue {
-    background-color: #FF6666;
-}
-
-/* Sets the font for the Social Proof quote */
-.list {
-    color:white;
-    font-family: "Montesserat";
-    font-size: 24px;
-}
-
-/* Creates the lead generation button */
-a:link, a:visited {
-    background-color: #FF6666;
-    color: white;
-    padding: 14px 25px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-}
-
-/* Changes the color of the lead generation button when hovering over */
-a:hover, a:active {
-    background-color: lightgreen;
-}
-
-/* Sets the font for the lead generation text */
-.boom {
-    color: black;
-    font-family: "Montesserat";
-    font-size: 32px;
-    text-align: center;
+.hr {  
+    width: 50%;  
+    height: 4px;  
+    background-color: #d91a1a;  
+    margin-bottom: 0px;  
+    margin-right: auto;  
+    margin-left: auto;  
+    margin-top: 0px;  
+    border-width: 2px;  
 }
