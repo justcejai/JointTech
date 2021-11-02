@@ -41,7 +41,7 @@ npm start or nodemon (only if installed)
                     
 ###### ScreenCasts for M2
 
-[Overview of new UI and our implementation of components](need to add*)
+[Overview of new UI and our implementation of components](https://youtu.be/7b7ESajPmcg)
 
 ###### Endpoints of JointTech
 * Endpoints for login/signup
