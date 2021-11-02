@@ -33,11 +33,15 @@ npm start or nodemon (only if installed)
 | Home | Complete | 
 | Login   | Complete  |
 | Create Account | Complete |
-| Profile | In Progress  | 
 | Event View   | In Progress  | [wireframe](https://postimg.cc/VdSDZDFS)
 | Event Calendar | In Progress  | [wireframe](https://postimg.cc/LqSDXRFf)
 | Event Swipe   | In Progress  | [wireframe](https://postimg.cc/Y47PQmfr)
 | Event Quick View  | In Progress  | [wireframe](https://postimg.cc/TKgQf1Ff)
+
+                    
+###### ScreenCasts for M2
+
+[Overview of new UI and our implementation of components](need to add*)
 
 ###### Endpoints of JointTech
 * Endpoints for login/signup
