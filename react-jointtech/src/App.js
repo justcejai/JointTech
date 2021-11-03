@@ -2,18 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
 import axios from 'axios';
 
-import Login from './Login';
-import Dashboard from './Dashboard';
-import Home from './Home';
-import Signup from './Signup';
-import LandingPage from './LandingPage';
-import CalendarCard from './CalendarCard';
-import CalEvent from './CalEvent';
-import PrivateRoute from './Utils/PrivateRoute';
-import PublicRoute from './Utils/PublicRoute';
+
+// import Dashboard from './Dashboard';
+
+// import CalendarCard from './CalendarCard';
+// import CalEvent from './CalEvent';
+// import PrivateRoute from './Utils/PrivateRoute';
+// import PublicRoute from './Utils/PublicRoute';
 import { getToken, removeUserSession, setUserSession } from './Utils/Common';
-import QVEvent from './QVEvent';
-import QuickviewCard from './QuickviewCard';
+// import QVEvent from './QVEvent';
+// import QuickviewCard from './QuickviewCard';
 
 function App() {
   const [authLoading, setAuthLoading] = useState(true);
@@ -50,7 +48,7 @@ function App() {
             <NavLink activeClassName="active" to="/dashboard">Dashboard</NavLink><small>(Access with token only)</small>
           </div>
           <div className="content">
-            <Switch>
+            {/* <Switch>
               <Route exact path="/" component={LandingPage} />
               <PublicRoute path="/home" component={Home} />
               <PublicRoute path="/login" component={Login} />
@@ -59,7 +57,7 @@ function App() {
               <PrivateRoute path="/event" component={CalEvent}/>
               <PrivateRoute path="/quickview" component={QuickviewCard}/>
               <PrivateRoute path="/quickviewevent" component={QVEvent}/>
-            </Switch>
+            </Switch> */}
           </div>
         </div>
       </BrowserRouter>

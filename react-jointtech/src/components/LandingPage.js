@@ -1,17 +1,16 @@
 import "./style.css";
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
-import axios from 'axios';
+import React, { Component } from 'react';
+import { Switch, Route, Link } from "react-router-dom";
 
-import Login from './Login';
-import Dashboard from './Dashboard';
-import Home from './Home';
-import Signup from './Signup';
-import PrivateRoute from './Utils/PrivateRoute';
-import PublicRoute from './Utils/PublicRoute';
-import { getToken, removeUserSession, setUserSession } from './Utils/Common';
+import Login from "./Login";
+import Signup from "./Signup";
+import Home from "./Home";
 
-function LandingPage() {
+export default function LandingPage() {
+    
+
+
+
     return (
         <div>
             <head>
@@ -221,10 +220,18 @@ function LandingPage() {
                         </div>       
                     </div>
                 </section>
+                <div className="container mt-3">
+                    <Switch>
+                        <Route exact path={["/", "/home"]} component={Home} />
+                        <Route exact path="/login" component={Login} />
+                        <Route exact path="/register" component={Signup} />
+                    </Switch>
+                </div>
             </body>
 
         </div>
     )
 }
 
-export default LandingPage;
+
+
