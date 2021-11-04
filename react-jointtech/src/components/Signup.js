@@ -1,16 +1,46 @@
 import React, { useState } from 'react';
 
+let fullName;
+let fullEmail;
+let password;
 
-export default function Signup() {
-      const [name, setName] = useState('');
-      const [email, setEmail] = useState('');
+function Signup() {
+      const [fullName, setName] = useState('');
+      const [fullEmail, setEmail] = useState('');
       const [password, setPassword] = useState('');
     
+    //   function signupSubmit(event) {
 
+    //     fetch('http://localhost:3000//api/routes/users/signup', {
+    //         method: "POST",
+    //         credentials: "include",
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({  fullName, username: fullEmail, password })
+    //     })
+    //     .then(response => response.json())
+    //     .then(async data => {
+    //         console.log(data);
+    //     })
+    // }
+      
       function handleSubmit(event) {
         event.preventDefault();
-        console.log({ name, email, password });
-        const params = new URLSearchParams({name, email, password});
+        // console.log({ name, email, password });
+        fetch('http://localhost:3000/api/users/signup', {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({  fullName, username: fullEmail, password })
+        })
+        .then(response => response.json())
+        .then(async data => {
+            console.log(data);
+        })
+        const params = new URLSearchParams({fullName, fullEmail, password});
         window.location = `/Home?${params}`;
       }
 
@@ -42,7 +72,7 @@ export default function Signup() {
                     <h1 className="log-in-text">Sign up</h1>
          
 
-                    <form action="/signup"  method="POST">
+                    <form onSubmit={handleSubmit}>
                         <div>
                             <label className="log-in-text namecolor" for="name">Name</label>
                             <input type="text" id="name" name="name" onChange={(event) => setName(event.target.value)} required/>
@@ -55,7 +85,7 @@ export default function Signup() {
                             <label className="log-in-text" for="name">Password</label>
                             <input type="password" id="password" name="password" onChange={(event) => setPassword(event.target.value)} required/>
                         </div>
-                        <button className="signup-button" type="submit">Register</button>
+                        <button className="signup-button" type="submit" >Register</button>
                     </form>
                     
                     <hr/>
@@ -71,3 +101,21 @@ export default function Signup() {
         </div>
       )     
 }
+
+function signupSubmit(event) {
+
+    fetch('http://localhost:3000//api/routes/users/signup', {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({  fullName, username: fullEmail, password })
+    })
+    .then(response => response.json())
+    .then(async data => {
+        console.log(data);
+    })
+}
+
+export default Signup;
