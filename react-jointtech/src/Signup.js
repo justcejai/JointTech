@@ -6,39 +6,46 @@ function Signup() {
       const [username, setUsername] = useState('');
       const [email, setEmail] = useState('');
       const [password, setPassword] = useState('');
-      
+      const history = useHistory()
 
-      function handleSignup(event) {
+      async function handleSignup(event) {
         event.preventDefault();
-       
+        const form = event.target
+        console.log({ username: form[0].value, email: form[1].value, password: form[2].value })
         const user = {
-          username: email,
-          password: password
+          username: form[0].value,
+          email: form[1].value,
+          password: form[2].value,
         }
     
-        fetch('http://localhost:3000/api/signup', {
-          method: "POST",
-          header: {
-            "Content-type": "application/json"
-          },
-          body: JSON.stringify(user)
-        }) 
-        .then(res => res.json())
-        .then(data => {
-          localStorage.setItem("token", data.token)
-        })
+        try {
+           const res = await fetch('/api/signup', {
+                method: "POST",
+                credentials: "include",
+                header: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify(user)
+            }) 
+            const data = await res.json()
+            // console.log(data.message)
+            window.location = `/Home`;
+        } catch(err) {
+            console.log(err)
+        }
+        
         
       }
     
-      useEffect(() => {
-        fetch('http://localhost:3000/api/getUserInfo', {
-          headers: {
-            "x-access-token": localStorage.getItem("token")
-          }
-        })
-        .then(res => res.json())
-        .then(data => data.isLoggedin ? history.push("/home"): null)
-      }, [])
+    //   useEffect(() => {
+    //     fetch('/api/getUserInfo', {
+    //       headers: {
+    //         "x-access-token": localStorage.getItem("token")
+    //       }
+    //     })
+    //     .then(res => res.json())
+    //     .then(data => data.isLoggedin ? history.push("/home"): null)
+    //   }, [])
     
       return  (
         <div>
@@ -68,7 +75,7 @@ function Signup() {
                     <h1 className="log-in-text">Sign up</h1>
          
 
-                    <form onSubmit={event => handleSignup(event)}>
+                    <form action= "/api/signup" method="POST" onSubmit={event => handleSignup(event)}>
                         <div>
                             <label className="log-in-text namecolor" for="name">Name</label>
                             <input type="text" id="username" name="username" onChange={(event) => setUsername(event.target.value)} required/>

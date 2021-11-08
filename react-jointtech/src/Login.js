@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { userHistory } from 'react-router'
+import { useHistory, userHistory } from 'react-router'
 import axios from 'axios';
 function Login() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
- 
+  const history = useHistory();
   // handle button click of login form
 
   //Login function
-  function handleLogin(event) {
+  async function handleLogin(event) {
     event.preventDefault();
    
     const user = {
@@ -17,29 +17,32 @@ function Login() {
       password: password
     }
 
-    fetch('http://localhost:3000/api/login', {
-      method: "POST",
-      header: {
-        "Content-type": "application/json"
-      },
-      body: JSON.stringify(user)
-    }) 
-    .then(res => res.json())
-    .then(data => {
-      localStorage.setItem("token", data.token)
-    })
+    try {
+      const res = await fetch('/api/login', {
+        method: "POST",
+        header: {
+          "Content-type": "application/json"
+        },
+        body: JSON.stringify(user)
+      }) 
+        const data = await res.json()
+        localStorage.setItem("token", data.token)
+    } catch(err) {
+      console.log(err)
+    }
+    
     
   }
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/isUserAuth', {
+    fetch('/api/isUserAuth', {
       headers: {
         "x-access-token": localStorage.getItem("token")
       }
     })
     .then(res => res.json())
     .then(data => data.isLoggedin ? history.push("/home"): null)
-  }, [])
+  }, [history])
 
   return (
     <div class="body">

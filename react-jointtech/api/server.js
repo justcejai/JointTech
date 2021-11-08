@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const port = 3000;
+const port = 3030;
 const mongoose = require('mongoose');
 const User = require('./models/user')
 const bcrypt = require('bcrypt')
