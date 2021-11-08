@@ -1,12 +1,16 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-
-import App from "./App";
-import Home from "./components/Home";
-import Signup from "./components/Signup";
-import Login from "./components/Login";
-import LandingPage from "./components/LandingPage";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import Login from './Login';
+import Signup from './Signup';
+import Home from './Home';
+// import CalendarCard from './CalendarCard';
+// import CalEvent from './CalEvent';
+// import QuickviewCard from './QuickviewCard';
+// import QVEvent from './QVEvent';
+import LandingPage from './LandingPage';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 ReactDOM.render(
     <React.StrictMode>
@@ -25,6 +29,5 @@ ReactDOM.render(
             </Switch>
         </BrowserRouter>
     </React.StrictMode>,
-    document.getElementById("root")
+    document.getElementById('root')
 );
-

@@ -2,144 +2,100 @@ const User = require("../models/user")
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
-const jwt = require("jsonwebtoken")
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
-const { getToken, CookieOptions, verifyUser, getRefreshToken } = require("../strategies/authenticate")
+function verifyJWT(req, res, next) {
+    const token = req.headers["x-access-token"]?.split(' ')[1]
 
-// Route for registering the use to the database.
-router.post('/signup', (req,res,next) => {
-    if (!req.body.fullName) {
-        res.statusCode = 500
-        res.send({
-            name: "NameError",
-            message: "Name Required",
+    if(token) {
+        jwt.verify(token, process.env.PassportSecret, (err, decoded) => {
+            if(err) {
+                return res.json({
+                    isLoggedIn: false,
+                    message: "Failed to authenticate"
+                })
+            }
+            res.user = {}
+            req.user.id = decoded.id
+            req.user.username = decoded.username
+            next()
         })
     } else {
-        // Add the user to the database
-        User.register( 
-            new User({username: req.body.email}),
-            req.body.password,
-            (err, user) => {
-                if(err) {
-                    res.statusCode = 500
-                    res.send(err)
-                } else {
-                    user.fullName = req.body.fullName
-                    user.fullEmail = req.body.fullEmail
-                    const token = getToken({ _id: user._id })
-                    const refreshToken = getRefreshToken({_id: user._id})
-                    user.refreshToken.push({refreshToken})
-                    user.save(err,user => {
-                        if(err) {
-                            res.status(500).send({ message: "Invalid info."});
-                        } else {
-                            res.cookie("refreshToken", refreshToken, CookieOptions)
-                            res.send({ success: true, token })
-                        }
-                    })
-                }
-            }
-        )
+        res.json({message: "Incorrect Token Given", isLoggedIn: false})
+    }
+}
+
+router.get("/getUserinfo", verifyJWT, (req,res) => {
+    res.json({isLoggedIn: true, username: req.user.username})
+})
+// Route for registering the use to the database.
+router.post('/signup', async (req,res) => {
+    const user = req.body;
+
+    const retrievedUsername = await User.findOne({ username: user.username })
+    const retrievedEmail = await User.findOne({email: user.email})
+
+    if (retrievedUsername || retrievedEmail ) {
+        res.json({message: "Username of email is already taken"})
+    } else {
+        user.password = await bcrypt.hash(req.body.password, 10)
+
+        const databaseUser = new User({
+            username: user.username.toLowerCase(),
+            email: user.email.toLowerCase(),
+            password: user.password
+        })
+
+        databaseUser.save()
+        res.json({message: "Success"})
     }
 });
 
-router.post("/login", passport.authenticate("local"), (req,res,next) => {
-    const token = getToken({ _id: req.user._id})
-    const refreshToken = getRefreshToken({_id: req.user._id})
-    User.findById(req.user._id).then(user => {
-            user.refreshToken.push({refreshToken})
-            user.save((err,user) => {
-                if(err) {
-                    res.statusCode = 500
-                    res.send(err)
-                } else {
-                    res.cookie("refreshToken", refreshToken, CookieOptions)
-                    res.send({success: true, token})
-                }
+router.post("/login", (req,res) => {
+    const userLoginInfo = req.body;
+    
+    User.findOne({username: userLoginInfo.username})
+    .then(databaseUser => {
+        if (!databaseUser) {
+            return res.json({
+                message: "Invalid username or password"
             })
-        },
-      err => next(err)
-    )
-})
-
-router.post("/refreshToken", (req,res,next) => {
-    const { signedCookies = {} } = req;
-    const { refreshToken } = signedCookies
-
-    if (refreshToken) {
-        try {
-            const payload = jwt.verift(refreshToken, process.env.RefreshSecret)
-            const userId = payload._id
-            User.findOne({_id: userId}).then(
-                user => {
-                    if(user) {
-                        const tokenIndex = user.refreshToken.findIndex( 
-                            item => item.refreshToken === refreshToken)
-
-                        if (tokenIndex === -1) {
-                            res.statusCode = 401
-                            res.send("Unauthorized")
-                        } else {
-                            const token = getToken({_id: userId})
-                            const newRefreshToken = getRefreshToken({ _id: userId})
-                            user.refreshToken[tokenIndex] = { refreshToken: newRefreshToken }
-                            user.save((err,user) => {
-                                if(err) {
-                                    res.statusCode = 500
-                                    res.send(err)
-                                } else {
-                                    res.cookie("refreshToken", newRefreshToken, CookieOptions)
-                                    res.send({ success: true, token})
-                                }
-                            })
-                        }
-                        
-                    } else {
-                        res.statusCode = 401
-                        res.send("Unauthorized")
+        } 
+        bcrypt.compare(userLoginInfo.password, databaseUser.password)
+        .then(matchPassword => {
+            if (matchPassword) {
+                const payLoad = {
+                    id: databaseUser._id,
+                    username: databaseUser.username
+                }
+                jwt.sign(
+                    payLoad,
+                    process.env.PassportSecret,
+                    {expiresIn: 86400},
+                    (err, token) => {
+                        return res.json({
+                            message: "success",
+                            token: "Bearer" + token
+                        })
                     }
-                },
-                err => next(err)
-            )   
-            } catch (err) {
-                res.statusCode = 401
-                res.send("Unauthorized")
+                )
+            } else {
+                return res.json({
+                    message: "Invalid username or password"
+                })
             }
-        } else {
-            res.statusCode = 401
-            res.send("Unauthorized")
-    }
+        })
+    })
 })
 
-router.get("/logout", verifyUser,(req,res,next) => {
-    const { signedCookies = {} } = req
-    const { refreshToken } = signedCookies
-    User.findById(req.user._id).then(
-        user => {
-            const tokenIndex = user.refreshToken.findIndex(
-                item => item.refreshToken === refreshToken
-            )
 
-            if (tokenIndex !== -1) {
-                user.refreshToken.id(user.refreshToken[tokenIndex]._id).remove()
-            }
+// router.get("/logout", verifyUser,(req,res) => {
+    
+// })
 
-            user.save((err,user) => {
-                if(err) {
-                    res.statusCode = 500
-                    res.send(err)
-                } else {
-                    res.clearCookie("refreshToken", CookieOptions)
-                    res.send({success: true})
-                }
-            })
-        },
-        err => next(err)
-    )
-})
-
-router.get("/profile", verifyUser, (req,res,next) => {
-    res.send(req.user)
-})
+// router.get("/profile", verifyUser, (req,res) => {
+//     res.send(req.user)
+// })
 
 module.exports = router;

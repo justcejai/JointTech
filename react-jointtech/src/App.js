@@ -3,15 +3,20 @@ import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
 import axios from 'axios';
 
 
-// import Dashboard from './Dashboard';
+import Dashboard from './Dashboard';
+import Login from './Login';
+import Signup from './Signup';
+import Home from './Home';
+import CalendarCard from './CalendarCard';
+import CalEvent from './CalEvent';
+import QuickviewCard from './QuickviewCard';
+import QVEvent from './QVEvent';
+import LandingPage from './LandingPage';
 
-// import CalendarCard from './CalendarCard';
-// import CalEvent from './CalEvent';
-// import PrivateRoute from './Utils/PrivateRoute';
-// import PublicRoute from './Utils/PublicRoute';
+import PrivateRoute from './Utils/PrivateRoute';
+import PublicRoute from './Utils/PublicRoute';
 import { getToken, removeUserSession, setUserSession } from './Utils/Common';
-// import QVEvent from './QVEvent';
-// import QuickviewCard from './QuickviewCard';
+
 
 function App() {
   const [authLoading, setAuthLoading] = useState(true);
@@ -39,16 +44,16 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <div>
-          <div className="header">
+          {/* <div className="header">
             <NavLink exact activeClassName="active" to="/">LandingPage</NavLink>
             <NavLink activeClassName="active" to="/home">Home</NavLink>
             <NavLink activeClassName="active" to="/login">Login</NavLink><small>(Access without token only)</small>
             <NavLink activeClassName="active" to="/signup">Signup</NavLink><small>(Access without token only)</small>
             <NavLink activeClassName="active" to="/calender">Calender</NavLink><small>(Access without token only)</small>
             <NavLink activeClassName="active" to="/dashboard">Dashboard</NavLink><small>(Access with token only)</small>
-          </div>
+          </div> */}
           <div className="content">
-            {/* <Switch>
+            <Switch>
               <Route exact path="/" component={LandingPage} />
               <PublicRoute path="/home" component={Home} />
               <PublicRoute path="/login" component={Login} />
@@ -57,7 +62,7 @@ function App() {
               <PrivateRoute path="/event" component={CalEvent}/>
               <PrivateRoute path="/quickview" component={QuickviewCard}/>
               <PrivateRoute path="/quickviewevent" component={QVEvent}/>
-            </Switch> */}
+            </Switch>
           </div>
         </div>
       </BrowserRouter>

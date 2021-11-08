@@ -1,43 +1,21 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema
-const passportLocalMongoose = require("passport-local-mongoose")
 
-const Session = new Schema ({
-    refreshToken: {
-        type: String, 
-        default: "",
-    },
-})
-
-const User = new Schema({
-  fullName: {
+const userSchema = mongoose.Schema({
+  username: {
       type: String,
-      default: "",
+      required: true,
   },
-  fullEmail: {
+  email: {
       type: String,
-      default: "",
+      required: true,
   },
-  authStrategy: {
+  password: {
       type: String,
-      default: "local",
-  },
-  points: {
-      type: Number,
-      default: 50,
-  },
-  refreshToken: {
-      type: [Session],
+      required: true,
   },
 })
 
-User.set("toJSON", {
-    transform: function(doc, ret, optinos) {
-        delete ret.refreshToken
-        return ret
-    },
-})
+const User = mongoose.model("User", userSchema)
 
-User.plugin(passportLocalMongoose)
 
-module.exports = mongoose.model("User", User)
+module.exports = User;
