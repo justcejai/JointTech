@@ -3,27 +3,26 @@ import { useHistory } from 'react-router';
 import { URLSearchParams } from "url"
 
 function Signup() {
-      const [name, setName] = useState('');
-      const [username, setUsername] = useState('');
-      const [email, setEmail] = useState('');
-      const [password, setPassword] = useState('');
+    //   const [name, setName] = useState('');
+    //   const [username, setUsername] = useState('');
+    //   const [email, setEmail] = useState('');
+    //   const [password, setPassword] = useState('');
       const history = useHistory()
 
       async function handleSignup(event) {
         event.preventDefault();
         const form = event.target
-        // console.log({ name: form[0].value, username: form[1].value, email: form[2].value, password: form[3].value })
+        // console.log({ name, username, email, password })
         const user = {
           name: form[0].value,
           username: form[1].value,
           email: form[2].value,
-          password: form[3].value,
+          password: form[3].value
         }
         console.log(user);
         try {
            const res = await fetch('/api/signup', {
                 method: "POST",
-                credentials: "same-origin",
                 header: {
                     "Content-type": "application/json"
                 },
@@ -77,19 +76,19 @@ function Signup() {
                     <form onSubmit={event => handleSignup(event)}>
                         <div>
                             <label className="log-in-text namecolor" htmlFor="name"></label>
-                            <input type="text" id="name" name="name" placeholder="Full name" onChange={(event) => setName(event.target.value)} required/>
+                            <input type="text" id="name" name="name" placeholder="Full name"  required/>
                         </div>
                         <div>
                             <label className="log-in-text namecolor" htmlFor="username"></label>
-                            <input type="text" id="username" name="username" placeholder="Username" onChange={(event) => setUsername(event.target.value)} required/>
+                            <input type="text" id="username" name="username" placeholder="Username"  required/>
                         </div>
                         <div>
                             <label className="log-in-text" htmlFor="email"></label>
-                            <input type="email" id="email" name="email" placeholder="Email" onChange={(event) => setEmail(event.target.value)} required/>
+                            <input type="email" id="email" name="email" placeholder="Email"  required/>
                         </div>
                         <div>
                             <label className="log-in-text" htmlFor="password"></label>
-                            <input type="password" id="password" name="password" placeholder="Password" onChange={(event) => setPassword(event.target.value)} required/>
+                            <input type="password" id="password" name="password" placeholder="Password"  required/>
                         </div>
                         <button className="signup-button" type="submit">Register</button>
                     </form>

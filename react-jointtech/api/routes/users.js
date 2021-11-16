@@ -4,6 +4,7 @@ const router = express.Router();
 const passport = require('passport');
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const { loginValidation, signupValidation } = require("../validation")
 
 function verifyJWT(req, res, next) {
     const token = req.headers["x-access-token"]?.split(' ')[1]
@@ -29,24 +30,22 @@ function verifyJWT(req, res, next) {
 // router.get("/getUserinfo", verifyJWT, (req,res) => {
 //     res.json({isLoggedIn: true, username: req.user.username})
 // })
+
 // Route for registering the use to the database.
 router.post('/signup', async (req,res) => {
-    // Make sure the use is not null
-    if(!req.body.username || !req.body.password) {
-        return res.json({message: "Please fill out all fields"})
-    }
-
-    const user = req.body;
-    console.log(user);
+    const user = req.body
+    console.log(user)
     const retrievedUsername = await User.findOne({ username: user.username })
     const retrievedEmail = await User.findOne({email: user.email})
+    const errorValidating = signupValidation(user)
 
-    // console.log({retrievedUsername, retrievedEmail})
-    if (retrievedUsername || retrievedEmail ) {
-        res.json({message: "Username of email is already taken"})
+    if ( errorValidating ) {
+        return res.json({message: "Error validating user info."})
+    } else 
+    if ( retrievedUsername || retrievedEmail ) {
+        return res.json({message: "Username or Email already exists"})
     } else {
-        user.password = await bcrypt.hash(req.user.password, 10)
-        // if (user.username && user.password && user.email) {
+        user.password = await bcrypt.hash(req.body.password, 10)
 
         const databaseUser = new User({
             name: user.name,
