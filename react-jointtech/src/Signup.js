@@ -3,6 +3,7 @@ import { useHistory } from 'react-router';
 import { URLSearchParams } from "url"
 
 function Signup() {
+      const [name, setName] = useState('');
       const [username, setUsername] = useState('');
       const [email, setEmail] = useState('');
       const [password, setPassword] = useState('');
@@ -11,30 +12,28 @@ function Signup() {
       async function handleSignup(event) {
         event.preventDefault();
         const form = event.target
-        console.log({ username: form[0].value, email: form[1].value, password: form[2].value })
+        // console.log({ name: form[0].value, username: form[1].value, email: form[2].value, password: form[3].value })
         const user = {
-          username: form[0].value,
-          email: form[1].value,
-          password: form[2].value,
+          name: form[0].value,
+          username: form[1].value,
+          email: form[2].value,
+          password: form[3].value,
         }
-    
+        console.log(user);
         try {
            const res = await fetch('/api/signup', {
                 method: "POST",
-                credentials: "include",
+                credentials: "same-origin",
                 header: {
                     "Content-type": "application/json"
                 },
                 body: JSON.stringify(user)
             }) 
             const data = await res.json()
-            // console.log(data.message)
-            window.location = `/Home`;
+            console.log(data)
         } catch(err) {
             console.log(err)
         }
-        
-        
       }
     
     //   useEffect(() => {
@@ -66,7 +65,7 @@ function Signup() {
                     </div>
                 </div>              
             </div>
-
+            {/* action= "/api/signup" method="POST" */}
 
             <div class="log-in-container">
 
@@ -75,18 +74,22 @@ function Signup() {
                     <h1 className="log-in-text">Sign up</h1>
          
 
-                    <form action= "/api/signup" method="POST" onSubmit={event => handleSignup(event)}>
+                    <form onSubmit={event => handleSignup(event)}>
                         <div>
-                            <label className="log-in-text namecolor" for="name">Name</label>
-                            <input type="text" id="username" name="username" onChange={(event) => setUsername(event.target.value)} required/>
+                            <label className="log-in-text namecolor" htmlFor="name"></label>
+                            <input type="text" id="name" name="name" placeholder="Full name" onChange={(event) => setName(event.target.value)} required/>
                         </div>
                         <div>
-                            <label className="log-in-text" for="email">Email</label>
-                            <input type="email" id="email" name="email" onChange={(event) => setEmail(event.target.value)} required/>
+                            <label className="log-in-text namecolor" htmlFor="username"></label>
+                            <input type="text" id="username" name="username" placeholder="Username" onChange={(event) => setUsername(event.target.value)} required/>
                         </div>
                         <div>
-                            <label className="log-in-text" for="password">Password</label>
-                            <input type="password" id="password" name="password" onChange={(event) => setPassword(event.target.value)} required/>
+                            <label className="log-in-text" htmlFor="email"></label>
+                            <input type="email" id="email" name="email" placeholder="Email" onChange={(event) => setEmail(event.target.value)} required/>
+                        </div>
+                        <div>
+                            <label className="log-in-text" htmlFor="password"></label>
+                            <input type="password" id="password" name="password" placeholder="Password" onChange={(event) => setPassword(event.target.value)} required/>
                         </div>
                         <button className="signup-button" type="submit">Register</button>
                     </form>
