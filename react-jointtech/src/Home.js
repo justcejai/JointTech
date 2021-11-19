@@ -1,14 +1,14 @@
+<<<<<<< HEAD
 import React, {  useContext } from "react";
 import { Redirect } from "react-router-dom";
+import React from "react";
 import Card from "./Card";
 import "bootstrap/dist/css/bootstrap.css";
 import CalendarCard from "./CalendarCard";
 import QuickviewCard from "./QuickviewCard";
 // import UserContext from "./context/UserContext"
-let username;
-let language;
-let card, setCard;
-let matches, setMatches;
+
+const events = [];
 
 function Home() {
    
@@ -66,7 +66,24 @@ function Home() {
                </div>
             </div>
          </div>
-      );
+      </div>
+   );
 }
+
+function addMyCalendar() {}
+
+// function getEvents() {
+//    fetch("https://eventlist9.free.beeceptor.com/events")
+//       .then((res) => res.json())
+//       .then((res) => {
+//          //console.log(res.events[0]);
+
+//          for (let i = 0; i < res.events.length; i++) {
+//             events.push(res.events[i]);
+//             //console.log(res.events[i]);
+//          }
+//          console.log(events);
+//       });
+// }
 
 export default Home;

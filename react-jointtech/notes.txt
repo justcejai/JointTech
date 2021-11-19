@@ -1,0 +1,3 @@
+http://localhost:3030/api/auth/github
+id=234d7bc03807b578eba7
+secret=d77f9105afb40c6be503a18dde8c01453c9ad8b2

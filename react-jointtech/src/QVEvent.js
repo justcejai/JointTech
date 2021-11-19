@@ -1,12 +1,53 @@
 import React, { Component } from "react";
 
 class QVEvent extends Component {
+   constructor(props) {
+      super(props);
+      this.state = {
+         hidden: true,
+         name: this.props.name,
+         description: this.props.description,
+         date: this.props.date,
+         time: this.props.time,
+      };
+   }
+
+   componentDidMount() {
+      setTimeout(() => {
+         this.setState({
+            hidden: false,
+         });
+      }, this.props.wait);
+   }
+
+   handleAddEvent = () => {
+      //alert("A new event was cresated");
+
+      let newEvent = {
+         name: this.props.name,
+         description: this.props.description,
+         date: this.props.date,
+         time: this.props.time,
+      };
+      console.log(newEvent);
+
+      fetch("https://eventlist3.free.beeceptor.com/events/calendar", {
+         method: "POST",
+         headers: { "Content-Type": "application/json" },
+         body: JSON.stringify(newEvent),
+      }).then(() => {
+         console.log("event added to my calendar");
+      });
+   };
+
    render() {
-      return (
+      return this.state.hidden ? (
+         " "
+      ) : (
          <div id="Event1" className="p-3 d-flex justify-content-around">
             <div id="E1Body">
                <div id="E1Desc" className="">
-                  {this.props.description}
+                  {this.props.name}
                </div>
                <div
                   id="E1TimeDate"
@@ -22,7 +63,11 @@ class QVEvent extends Component {
                </div>
             </div>
             <div id="E1Button" className="pt-2">
-               <button type="button" className="btn btn-secondary btn-sm">
+               <button
+                  onClick={this.handleAddEvent}
+                  type="button"
+                  className="btn btn-secondary btn-sm"
+               >
                   Add
                </button>
             </div>

@@ -1,50 +1,50 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import axios from "axios";
 
+import Login from "./Login";
+import Signup from "./Signup";
+import Home from "./Home";
+import CalendarCard from "./CalendarCard";
+import CalEvent from "./CalEvent";
+import QuickviewCard from "./QuickviewCard";
+import QVEvent from "./QVEvent";
+import LandingPage from "./LandingPage";
 
-import Dashboard from './Dashboard';
-import Login from './Login';
-import Signup from './Signup';
-import Home from './Home';
-import CalendarCard from './CalendarCard';
-import CalEvent from './CalEvent';
-import QuickviewCard from './QuickviewCard';
-import QVEvent from './QVEvent';
-import LandingPage from './LandingPage';
-
-import PrivateRoute from './Utils/PrivateRoute';
-import PublicRoute from './Utils/PublicRoute';
-import { getToken, removeUserSession, setUserSession } from './Utils/Common';
-
+import PrivateRoute from "./Utils/PrivateRoute";
+import PublicRoute from "./Utils/PublicRoute";
+import { getToken, removeUserSession, setUserSession } from "./Utils/Common";
 
 function App() {
-  const [authLoading, setAuthLoading] = useState(true);
+   const [authLoading, setAuthLoading] = useState(true);
 
-  useEffect(() => {
-    const token = getToken();
-    if (!token) {
-      return;
-    }
+   useEffect(() => {
+      const token = getToken();
+      if (!token) {
+         return;
+      }
 
-    axios.get(`http://localhost:4000/verifyToken?token=${token}`).then(response => {
-      setUserSession(response.data.token, response.data.user);
-      setAuthLoading(false);
-    }).catch(error => {
-      removeUserSession();
-      setAuthLoading(false);
-    });
-  }, []);
+      axios
+         .get(`http://localhost:4000/verifyToken?token=${token}`)
+         .then((response) => {
+            setUserSession(response.data.token, response.data.user);
+            setAuthLoading(false);
+         })
+         .catch((error) => {
+            removeUserSession();
+            setAuthLoading(false);
+         });
+   }, []);
 
-  if (authLoading && getToken()) {
-    return <div className="content">Checking Authentication...</div>
-  }
+   if (authLoading && getToken()) {
+      return <div className="content">Checking Authentication...</div>;
+   }
 
-  return (
-    <div className="App">
-      <BrowserRouter>
-        <div>
-          {/* <div className="header">
+   return (
+      <div className="App">
+         <BrowserRouter>
+            <div>
+               {/* <div className="header">
             <NavLink exact activeClassName="active" to="/">LandingPage</NavLink>
             <NavLink activeClassName="active" to="/home">Home</NavLink>
             <NavLink activeClassName="active" to="/login">Login</NavLink><small>(Access without token only)</small>
@@ -52,22 +52,25 @@ function App() {
             <NavLink activeClassName="active" to="/calender">Calender</NavLink><small>(Access without token only)</small>
             <NavLink activeClassName="active" to="/dashboard">Dashboard</NavLink><small>(Access with token only)</small>
           </div> */}
-          <div className="content">
-            <Switch>
-              <Route exact path="/" component={LandingPage} />
-              <PublicRoute path="/home" component={Home} />
-              <PublicRoute path="/login" component={Login} />
-              <PublicRoute path="/signup" component={Signup}/>
-              <PrivateRoute path="/calender" component={CalendarCard}/>
-              <PrivateRoute path="/event" component={CalEvent}/>
-              <PrivateRoute path="/quickview" component={QuickviewCard}/>
-              <PrivateRoute path="/quickviewevent" component={QVEvent}/>
-            </Switch>
-          </div>
-        </div>
-      </BrowserRouter>
-    </div>
-  );
+               <div className="content">
+                  <Switch>
+                     <Route exact path="/" component={LandingPage} />
+                     <PublicRoute path="/home" component={Home} />
+                     <PublicRoute path="/login" component={Login} />
+                     <PublicRoute path="/signup" component={Signup} />
+                     <PrivateRoute path="/calender" component={CalendarCard} />
+                     <PrivateRoute path="/event" component={CalEvent} />
+                     <PrivateRoute
+                        path="/quickview"
+                        component={QuickviewCard}
+                     />
+                     <PrivateRoute path="/quickviewevent" component={QVEvent} />
+                  </Switch>
+               </div>
+            </div>
+         </BrowserRouter>
+      </div>
+   );
 }
 
 export default App;

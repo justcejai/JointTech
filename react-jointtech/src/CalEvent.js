@@ -22,7 +22,11 @@ class CalEvent extends Component {
                </div>
             </div>
             <div id="E1Button" className="pt-2">
-               <button type="button" className="btn btn-secondary btn-sm">
+               <button
+                  onClick={this.props.hideEvent}
+                  type="button"
+                  className="btn btn-secondary btn-sm"
+               >
                   Remove
                </button>
             </div>
