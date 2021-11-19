@@ -1,6 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import React, {  useContext } from "react";
 import { Redirect } from "react-router-dom";
+=======
+>>>>>>> ea2bf196c8471cee9e4d37a45520e41ea4d1878e
 import React from "react";
 import Card from "./Card";
 import "bootstrap/dist/css/bootstrap.css";
@@ -11,6 +14,7 @@ import QuickviewCard from "./QuickviewCard";
 const events = [];
 
 function Home() {
+<<<<<<< HEAD
    
    // useEffect(() => {
   //   const userInfo = localStorage.getItem("userInfo");
@@ -64,6 +68,40 @@ function Home() {
                   <CalendarCard />
                   <Card header={"Event Swipe"} />
                </div>
+=======
+   // const [userContext, setUserContext] = useContext(UserContext)
+   // Logout function
+   // function logout() {
+   //    fetch("http://localhost/api/users/logout", {
+   //       credentials: "include",
+   //       headers: {
+   //          "Content-Type": "applications/json",
+   //          // Authorization: `Bearer ${userContext.token}`
+   //       },
+   //    }).then(async (response) => {
+   //       // setUserContext(oldValues => {
+   //       //    return {...oldValues, detials: undefined, token: null}
+   //       // })
+   //       window.localStorage.setItem("logout", Date.now());
+   //    });
+   // }
+
+   //getEvents();
+
+   return (
+      <div>
+         <div>
+            <h1>JointTech</h1>
+         </div>
+         <div className="" style={{ backgroundColor: "#D3D3D3" }}>
+            <div
+               className="d-flex justify-content-around "
+               style={{ display: "flex", flexDirection: "row" }}
+            >
+               <CalendarCard />
+               <Card header={"Event Swipe"} />
+               <QuickviewCard addToCal={addMyCalendar()} />
+>>>>>>> ea2bf196c8471cee9e4d37a45520e41ea4d1878e
             </div>
          </div>
       </div>

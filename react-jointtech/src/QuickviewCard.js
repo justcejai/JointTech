@@ -32,7 +32,11 @@ const QuickviewCard = (props) => {
    const [event5, setEvent5] = useState(undefined);
 
    function getEvents() {
+<<<<<<< HEAD
       fetch("https://eventlist3.free.beeceptor.com/events")
+=======
+      fetch("https://eventlist4.free.beeceptor.com/events")
+>>>>>>> ea2bf196c8471cee9e4d37a45520e41ea4d1878e
          .then((res) => res.json())
          .then((res) => {
             //console.log(res.events[0]);
