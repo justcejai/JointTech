@@ -1,4 +1,5 @@
 import React, {  useContext } from "react";
+import { Redirect } from "react-router-dom";
 import Card from "./Card";
 import "bootstrap/dist/css/bootstrap.css";
 import CalendarCard from "./CalendarCard";
@@ -10,22 +11,46 @@ let card, setCard;
 let matches, setMatches;
 
 function Home() {
-   // const [userContext, setUserContext] = useContext(UserContext)
-   // Logout function
-   function logout() {
-      fetch("http://localhost/api/users/logout", {
-         credentials: "include", 
-         headers: {
-            "Content-Type": "applications/json",
-            // Authorization: `Bearer ${userContext.token}`
-         }
-      }).then(async response => {
-         // setUserContext(oldValues => {
-         //    return {...oldValues, detials: undefined, token: null}
-         // })
-         window.localStorage.setItem("logout", Date.now())
-      })
-   }
+   
+   // useEffect(() => {
+  //   const userInfo = localStorage.getItem("userInfo");
+
+  //   if (userInfo) {
+  //     history.push("/Home")
+  //   }
+  // }, [history])
+   
+//   const submitHandler = async(e) => {
+//    e.preventDefault();
+ 
+//    try {
+//      const config = {
+//        headers: {
+//          "Content-type": "application/json",
+//        },
+//      };
+
+
+//      const { data } = await axios.post(
+//        "/api/login", 
+//        {
+//          email, 
+//          password,
+//        }, 
+//        config
+//      );
+
+//      const params = new URLSearchParams({ email })
+//      window.location = `/Home?${params.toString()}`;
+
+//      console.log(data);
+//      localStorage.setItem('userInfo', JSON.stringify(data));
+
+
+//    } catch (error) {
+//      setError(error.response.data.message);
+//    }
+//  }
       return (
          <div>
             <div>
@@ -38,7 +63,6 @@ function Home() {
                >
                   <CalendarCard />
                   <Card header={"Event Swipe"} />
-                  <QuickviewCard />
                </div>
             </div>
          </div>

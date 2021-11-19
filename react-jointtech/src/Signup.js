@@ -1,50 +1,49 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
-import { URLSearchParams } from "url"
+import { Redirect } from 'react-router-dom';
+import axios from 'axios'
 
 function Signup() {
-    //   const [name, setName] = useState('');
-    //   const [username, setUsername] = useState('');
-    //   const [email, setEmail] = useState('');
-    //   const [password, setPassword] = useState('');
-      const history = useHistory()
+      const [name, setName] = useState("")
+      const [username, setUsername] = useState("")
+      const [email, setEmail] = useState("")
+      const [password, setPassword] = useState("")
+      const [error, setError] = useState(false)
 
-      async function handleSignup(event) {
-        event.preventDefault();
-        const form = event.target
-        // console.log({ name, username, email, password })
-        const user = {
-          name: form[0].value,
-          username: form[1].value,
-          email: form[2].value,
-          password: form[3].value
-        }
-        console.log(user);
+      const submitHandler = async(e) => {
+        e.preventDefault();
+      
         try {
-           const res = await fetch('/api/signup', {
-                method: "POST",
-                header: {
-                    "Content-type": "application/json"
-                },
-                body: JSON.stringify(user)
-            }) 
-            const data = await res.json()
-            console.log(data)
-        } catch(err) {
-            console.log(err)
+          const config = {
+            headers: {
+              "Content-type": "application/json",
+            },
+          };
+    
+          const { data } = await axios.post(
+            "/api/register", 
+            {
+              name,
+              username,
+              email, 
+              password,
+            }, 
+            config
+          );
+          
+          console.log(data);
+          localStorage.setItem('userInfo', JSON.stringify(data));
+          
+    
+        } catch (error) {
+          setError(error.response.data.message);
         }
+        
+        const params = new URLSearchParams({ name, username })
+        window.location = `/Home?${params.toString()}`;
       }
-    
-    //   useEffect(() => {
-    //     fetch('/api/getUserInfo', {
-    //       headers: {
-    //         "x-access-token": localStorage.getItem("token")
-    //       }
-    //     })
-    //     .then(res => res.json())
-    //     .then(data => data.isLoggedin ? history.push("/home"): null)
-    //   }, [])
-    
+      
+
       return  (
         <div>
             <div id="top-of-page" class="container-fluid">
@@ -64,43 +63,35 @@ function Signup() {
                     </div>
                 </div>              
             </div>
-            {/* action= "/api/signup" method="POST" */}
 
             <div class="log-in-container">
 
                 <div class="row">
                     
                     <h1 className="log-in-text">Sign up</h1>
-         
-
-                    <form onSubmit={event => handleSignup(event)}>
+    
+                    <form onSubmit={submitHandler}>
                         <div>
                             <label className="log-in-text namecolor" htmlFor="name"></label>
-                            <input type="text" id="name" name="name" placeholder="Full name"  required/>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Full name" onChange={(e) => setName(e.target.value)} />
                         </div>
                         <div>
                             <label className="log-in-text namecolor" htmlFor="username"></label>
-                            <input type="text" id="username" name="username" placeholder="Username"  required/>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Username"  onChange={(e) => setUsername(e.target.value)}/>
                         </div>
                         <div>
                             <label className="log-in-text" htmlFor="email"></label>
-                            <input type="email" id="email" name="email" placeholder="Email"  required/>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email"  onChange={(e) => setEmail(e.target.value)}/>
                         </div>
                         <div>
                             <label className="log-in-text" htmlFor="password"></label>
-                            <input type="password" id="password" name="password" placeholder="Password"  required/>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password"  onChange={(e) => setPassword(e.target.value)}/>
                         </div>
+                        <br></br>
                         <button className="signup-button" type="submit">Register</button>
                     </form>
-                    
+                    <label>Already have an account?</label> <a href="/signup">Register</a>
                     <hr/>
-                        
-                    <a href="/">
-                        <button class="button">
-                            Landing Page
-                        </button>
-                    </a>
-
                     </div>
             </div>
         </div>

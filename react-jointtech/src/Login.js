@@ -1,48 +1,47 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, userHistory } from 'react-router'
 import axios from 'axios';
-function Login() {
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const history = useHistory();
-  // handle button click of login form
+const Login = (history) => {
+  const [email, setEmail ] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(false)
 
-  //Login function
-  async function handleLogin(event) {
-    event.preventDefault();
-   
-    const user = {
-      username: email,
-      password: password
-    }
+  
 
+  const submitHandler = async(e) => {
+    e.preventDefault();
+  
     try {
-      const res = await fetch('/api/login', {
-        method: "POST",
-        header: {
-          "Content-type": "application/json"
+      const config = {
+        headers: {
+          "Content-type": "application/json",
         },
-        body: JSON.stringify(user)
-      }) 
-        const data = await res.json()
-        localStorage.setItem("token", data.token)
-    } catch(err) {
-      console.log(err)
+      };
+
+
+      const { data } = await axios.post(
+        "/api/login", 
+        {
+          email, 
+          password,
+        }, 
+        config
+      );
+
+
+      console.log(data);
+      localStorage.setItem('userInfo', JSON.stringify(data));
+
+
+    } catch (error) {
+      setError(error.response.data.message);
     }
-    
-    
+    const params = new URLSearchParams({ email })
+    window.location = `/Home?${params.toString()}`;
   }
 
-  useEffect(() => {
-    fetch('/api/isUserAuth', {
-      headers: {
-        "x-access-token": localStorage.getItem("token")
-      }
-    })
-    .then(res => res.json())
-    .then(data => data.isLoggedin ? history.push("/home"): null)
-  }, [history])
+
 
   return (
     <div class="body">
@@ -68,17 +67,19 @@ function Login() {
       <div class="log-in-container">
         <div class="row">
           <h3 class="log-in-text">Login</h3>
-          <form onSubmit={event => handleLogin(event)}>
+          <form onSubmit={submitHandler}>
+            {error && "Invalid email or password."}
             <div>
-              <label className="log-in-text namecolor" for="name">Email</label>
-              <input type="email" id="email" name="email" onChange={(event) => setEmail(event.target.value)} required />
+              <label className="log-in-text namecolor" for="name"></label>
+              <input type="email" id="email" name="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} required/>
             </div>
             <div>
-              <label className="log-in-text" for="email">Password</label>
-              <input type="password" id="password" name="password" onChange={(event) => setPassword(event.target.value)} required />
+              <label className="log-in-text" for="email"></label>
+              <input type="password" id="password" name="password" placeholder="Password"  onChange={(e) => setPassword(e.target.value)} required />
             </div>
               <button className="login-button" type="submit">Login</button>
           </form>
+          <label>Need to signup for an account?</label> <a href="/signup">Register</a>
         </div>
       </div>
 

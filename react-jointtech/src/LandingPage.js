@@ -8,7 +8,7 @@ import Home from "./Home";
 
 export default function LandingPage() {
     
-
+    
 
     return (
         <div>
@@ -221,7 +221,7 @@ export default function LandingPage() {
                 </section>
                 <div className="container mt-3">
                     <Switch>
-                        <Route exact path={["/", "/home"]} component={Home} />
+                        {/* <Route exact path={["/", "/home"]} component={Home} /> */}
                         <Route exact path="/login" component={Login} />
                         <Route exact path="/signup" component={Signup} />
                     </Switch>
