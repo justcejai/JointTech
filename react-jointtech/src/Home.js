@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import Card from "./Card";
 import "bootstrap/dist/css/bootstrap.css";
 import CalendarCard from "./CalendarCard";
@@ -10,22 +10,22 @@ const events = [];
 function Home() {
    // const [userContext, setUserContext] = useContext(UserContext)
    // Logout function
-   function logout() {
-      fetch("http://localhost/api/users/logout", {
-         credentials: "include",
-         headers: {
-            "Content-Type": "applications/json",
-            // Authorization: `Bearer ${userContext.token}`
-         },
-      }).then(async (response) => {
-         // setUserContext(oldValues => {
-         //    return {...oldValues, detials: undefined, token: null}
-         // })
-         window.localStorage.setItem("logout", Date.now());
-      });
-   }
+   // function logout() {
+   //    fetch("http://localhost/api/users/logout", {
+   //       credentials: "include",
+   //       headers: {
+   //          "Content-Type": "applications/json",
+   //          // Authorization: `Bearer ${userContext.token}`
+   //       },
+   //    }).then(async (response) => {
+   //       // setUserContext(oldValues => {
+   //       //    return {...oldValues, detials: undefined, token: null}
+   //       // })
+   //       window.localStorage.setItem("logout", Date.now());
+   //    });
+   // }
 
-   getEvents();
+   //getEvents();
 
    return (
       <div>
@@ -34,12 +34,12 @@ function Home() {
          </div>
          <div className="" style={{ backgroundColor: "#D3D3D3" }}>
             <div
-               className="d-flex judstify-content-aroufnd "
+               className="d-flex justify-content-around "
                style={{ display: "flex", flexDirection: "row" }}
             >
-               <CalendarCard eventList={events} />
+               <CalendarCard />
                <Card header={"Event Swipe"} />
-               <QuickviewCard eventList={events} addToCal={addMyCalendar()} />
+               <QuickviewCard addToCal={addMyCalendar()} />
             </div>
          </div>
       </div>
@@ -48,17 +48,18 @@ function Home() {
 
 function addMyCalendar() {}
 
-function getEvents() {
-   fetch("https://eventList7.free.beeceptor.com/events")
-      .then((res) => res.json())
-      .then((res) => {
-         //console.log(res.events[0]);
+// function getEvents() {
+//    fetch("https://eventlist9.free.beeceptor.com/events")
+//       .then((res) => res.json())
+//       .then((res) => {
+//          //console.log(res.events[0]);
 
-         for (let i = 0; i < res.events.length; i++) {
-            events.push(res.events[i]);
-            //console.log(res.events[i]);
-         }
-      });
-}
+//          for (let i = 0; i < res.events.length; i++) {
+//             events.push(res.events[i]);
+//             //console.log(res.events[i]);
+//          }
+//          console.log(events);
+//       });
+// }
 
 export default Home;
