@@ -31,7 +31,7 @@ class QVEvent extends Component {
       };
       console.log(newEvent);
 
-      fetch("https://eventlist3.free.beeceptor.com/events/calendar", {
+      fetch("https://eventlist4.free.beeceptor.com/events/calendar", {
          method: "POST",
          headers: { "Content-Type": "application/json" },
          body: JSON.stringify(newEvent),

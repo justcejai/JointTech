@@ -32,7 +32,7 @@ const CalendarCard = (props) => {
    }
 
    function getEvents() {
-      fetch("https://eventlist3.free.beeceptor.com/events/calendar")
+      fetch("https://eventlist4.free.beeceptor.com/events/calendar")
          .then((res) => res.json())
          .then((res) => {
             //console.log(res.events[0]);
@@ -59,7 +59,7 @@ const CalendarCard = (props) => {
       setModalIsOpen(false);
       const newEvent = { name, description, date, time };
       console.log(newEvent);
-      fetch("https://eventlist3.free.beeceptor.com/events/calendar", {
+      fetch("https://eventlist3.free.beeceptor.com/events", {
          method: "POST",
          headers: { "Content-Type": "application/json" },
          body: JSON.stringify(newEvent),

@@ -6,7 +6,7 @@ class CalEvent extends Component {
          <div id="Event1" className="p-3 d-flex justify-content-around">
             <div id="E1Body">
                <div id="E1Desc" className="">
-                  {this.props.description}
+                  {this.props.name}
                </div>
                <div
                   id="E1TimeDate"
